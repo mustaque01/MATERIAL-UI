@@ -1,14 +1,14 @@
-import SearchBox from "./searchBox";
+import SearchBox from "./searchBox.jsx";
 //import './App.css'  
 
 function App() {
 
   return (
 
-    <>
-    searchBox
+    <><>
+      searchBox
       <SearchBox />
-    </>
+    </><br></br></>
   );
 }
 
