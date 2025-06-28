@@ -10,6 +10,6 @@ function App() {
       <SearchBox />
     </><br></br></>
   );
-}
+};
 
-export default App
+export default App;
