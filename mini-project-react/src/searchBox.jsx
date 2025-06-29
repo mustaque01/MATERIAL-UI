@@ -7,13 +7,26 @@ import { useState } from "react";
 export default function SearchBox({ setSearchTerm }) {
     let [city, setCity] = useState("");
 
-    const API_URL = "https://api.openweathermap.org/data/2.5/weather";
+    const API_URL = "https://api.openweathermap.org/data/2.5/weather?";
     const API_KEY = "a5c4657799eaaedb30c770a11c159535";
-    async function fetchWeatherData(city) {
-            let data = await (await fetch(`${API_URL}?q=${city}&appid=${API_KEY}`)).json();
-        return data;
+    let getWeatherData = async (city) => {
+      try {
+        let response = await fetch(`${API_URL}q=${city}&appid=${API_KEY}`);
+        let jsonResponse = await response.json();
+        console.log(jsonResponse);
+        if (jsonResponse.cod === 200) {
+            console.log("Weather data fetched successfully");
+        } else {
+            console.error("Error fetching weather data:", jsonResponse.message);
+        }
+      } catch (error) {
+        console.error("Error fetching weather data:", error);
+      }
     };
-    
+
+    function handlechange(e) {
+         setCity(e.target.value);
+     }
 
     let handleSubmit = (e) => {
         e.preventDefault();
@@ -21,6 +34,7 @@ export default function SearchBox({ setSearchTerm }) {
             setSearchTerm(city);
         }
         setCity("");
+        getWeatherData(city); 
     };
 
 
