@@ -14,6 +14,14 @@ export default function SearchBox({ setSearchTerm }) {
         let response = await fetch(`${API_URL}q=${city}&appid=${API_KEY}`);
         let jsonResponse = await response.json();
         console.log(jsonResponse);
+        let result = {
+          temp: jsonResponse.main.temp,
+          humidity: jsonResponse.main.humidity,
+          pressure: jsonResponse.main.pressure,
+          wind: jsonResponse.wind.speed,
+          description: jsonResponse.weather[0].description,
+          
+        }
         if (jsonResponse.cod === 200) {
             console.log("Weather data fetched successfully");
         } else {
